@@ -1,8 +1,7 @@
-/* Write your T-SQL query statement below */
+# Write your MySQL query statement below
+With CTE1 as (
+SELECT Email ,count(email) as countEmail from person
+group by Email
+having countEmail >1)
 
-
-SELECT A.Email from
-(
-    Select count(Email) as counts , Email from Person
-    group by Email
-) A where counts>1
+SELECT Email from cte1
