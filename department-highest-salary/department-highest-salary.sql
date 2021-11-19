@@ -1,11 +1,16 @@
 /* Write your T-SQL query statement below */
-WITH CTE as 
+
+WITH CTE1 as 
 (
-SELECT e.Id, e.Name as Emp, d.Name as Dep, e.salary,
-DENSE_RANK() OVER (PARTITION BY e.DepartmentId ORDER BY e.salary desc) as ranked_salary
-    FROM employee e Inner join Department d on
-e.DepartmentId = d.Id
+SELECT d.name as department, e.name as employee, e.salary,
+RANK() OVER(PARTITION BY d.name ORDER BY Salary desc) as salary_rank
+from employee e
+inner join department d 
+on d.id = e.departmentId 
+    
+    
 )
 
-SELECT Dep as Department, Emp as Employee, Salary FROM CTE
-Where ranked_salary =1
+
+SELECT department, employee, salary FROM cte1
+where salary_rank =1
